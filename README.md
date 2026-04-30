@@ -1,45 +1,9 @@
 # E-Commerce Platform - Backend Project Overview
 
 ## Project Structure
-This is a **microservices-based e-commerce platform** built with **Spring Boot 4.0.1** and **Spring Cloud 2025.1.0** using Java 25. The architecture follows the **service mesh pattern** with centralized configuration, service discovery, and API gateway.
+This is a **microservices-based e-commerce platform** built with **Spring Boot** and **Spring Cloud 2025** using Java 25. The architecture follows the **service mesh pattern** with centralized configuration, service discovery, and API gateway.
 
 ---
-
-## Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        API Gateway (8080)                       │
-│  - Handles authentication, filtering, rate limiting             │
-│  - Routes requests to microservices                             │
-│  - JWT token validation & refresh token management              │
-│  - CORS configuration                                           │
-└───────────────┬────────────────────────────────────────────────-┘
-                │
-    ┌───────────┼────────────┬──────────────┬──────────────┐
-    │           │            │              │              │
-    ▼           ▼            ▼              ▼              ▼
-┌─────────┐ ┌────────┐ ┌──────────┐ ┌─────────────┐ ┌──────────────┐
-│  Eureka │ │ Config │ │   User   │ │  Product    │ │   Order      │
-│ Server  │ │ Server │ │ Service  │ │  Service    │ │  Service     │
-│ (8761)  │ │ (8888) │ │ (8081)   │ │  (8082)     │ │  (8083)      │
-└─────────┘ └────────┘ └──────────┘ └─────────────┘ └──────────────┘
-                │           │            │              │
-                └───────────┼────────────┴──────────────┘
-                            │
-                    ┌───────┴───────┬────────────────┐
-                    ▼               ▼                ▼
-                ┌─────────────┐ ┌──────────────┐ ┌────────────────┐
-                │    Cart     │ │ Notification │ │   Databases    │
-                │   Service   │ │   Service    │ │  (PostgreSQL)  │
-                │   (8084)    │ │   (8085)     │ │                │
-                └─────────────┘ └──────────────┘ │  - Elasticsearch
-                                                  │  - RabbitMQ
-                                                  └────────────────┘
-```
-
----
-
 ## Services Overview
 
 ### 1. **API Gateway** (Port: 8080)
@@ -81,7 +45,6 @@ This is a **microservices-based e-commerce platform** built with **Spring Boot 4
 - OAuth2 integration (Google login)
 - User registration and authentication
 - Cookie management for token storage
-- AMQP/RabbitMQ integration for event publishing
 - Tracing with Brave/Zipkin
 
 **Dependencies:**
@@ -594,4 +557,8 @@ This is a **production-ready microservices architecture** with:
 - Comprehensive error handling
 
 The architecture is scalable, resilient, and follows microservices best practices.
+
+---
+Note: The project is yet to be finished so when you pull or clone the repository, you may find some services are not fully 
+implemented or have placeholder code. The README will be updated as the project progresses.
 
