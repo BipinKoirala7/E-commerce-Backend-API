@@ -172,7 +172,7 @@ stripe:
 
 ---
 
-### 7. **Eureka Server** (Port: 8761)
+### 6. **Eureka Server** (Port: 8761)
 **Framework:** Spring Cloud Netflix Eureka  
 **Role:** Service registry and discovery
 
@@ -187,7 +187,7 @@ stripe:
 
 ---
 
-### 8. **Config Server** (Port: 8888)
+### 7. **Config Server** (Port: 8888)
 **Framework:** Spring Cloud Config Server  
 **Role:** Centralized configuration management
 
