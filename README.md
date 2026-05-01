@@ -548,5 +548,10 @@ The architecture is scalable, resilient, and follows microservices best practice
 
 ---
 Note: The project is yet to be finished so when you pull or clone the repository, you may find some services are not fully 
-implemented or have placeholder code. The README will be updated as the project progresses.
+implemented or have placeholder code. The README will be updated as the project progresses. The things that are going to be added are: 
+- Notification Service (email notifications for order status updates)
+- Additional error handling and edge cases
+- More comprehensive unit and integration tests
+- DockerFile for running the app in one go
+- Elasticsearch integration for product search
 
