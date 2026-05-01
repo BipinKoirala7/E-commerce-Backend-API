@@ -1,7 +1,7 @@
 # E-Commerce Platform - Backend Project Overview
 
 ## Project Structure
-This is a **microservices-based e-commerce platform** built with **Spring Boot** and **Spring Cloud 2025** using Java 25. The architecture follows the **service mesh pattern** with centralized configuration, service discovery, and API gateway.
+This is a **microservices-based e-commerce platform** built with **Spring Boot** and **Spring Cloud** using Java. The architecture follows the **service mesh pattern** with centralized configuration, service discovery, and API gateway.
 
 ---
 ## Services Overview
@@ -25,7 +25,6 @@ This is a **microservices-based e-commerce platform** built with **Spring Boot**
 /api/v1/auth/**     → User Service (Authentication)
 /api/v1/oauth2/**   → User Service (OAuth2)
 /api/v1/product/**  → Product Service
-/api/v1/cart/**     → Cart Service
 /api/v1/cart-item/**  → Cart Service
 /api/v1/wishlist/** → Cart Service
 /api/v1/order/**    → Order Service
@@ -69,7 +68,6 @@ This is a **microservices-based e-commerce platform** built with **Spring Boot**
 **Key Features:**
 - Product CRUD operations
 - Category management
-- Elasticsearch integration for full-text search
 - Product specifications and attributes
 - Internal APIs for other services (via gateway secret)
 - OpenTelemetry tracing with OTLP metrics
@@ -77,7 +75,6 @@ This is a **microservices-based e-commerce platform** built with **Spring Boot**
 
 **Dependencies:**
 - Spring Data JPA
-- Spring Data Elasticsearch
 - PostgreSQL driver
 - OpenTelemetry
 - Micrometer Prometheus
@@ -112,7 +109,7 @@ This is a **microservices-based e-commerce platform** built with **Spring Boot**
 **Dependencies:**
 - Spring Data JPA
 - Stripe Java SDK (v32.0.0)
-- hutool-core (Chinese utility library)
+- hutool-core (utility library)
 - JWT (JJWT 0.12.3)
 - MapStruct
 
@@ -154,7 +151,6 @@ stripe:
 
 **Dependencies:**
 - Spring Data JPA
-- Spring Data Elasticsearch (implicit)
 - PostgreSQL driver
 - OpenTelemetry
 - JWT (JJWT 0.12.3)
@@ -394,24 +390,19 @@ cors:
 ## Docker & Deployment Notes
 
 ### Service Ports Summary
-| Service | Port | Database | Auth Method |
-|---------|------|----------|-------------|
-| API Gateway | 8080 | N/A | JWT |
-| User Service | 8081 | PostgreSQL | JWT |
-| Product Service | 8082 | PostgreSQL | Gateway Secret + JWT |
-| Order Service | 8083 | PostgreSQL | JWT |
-| Cart Service | 8084 | PostgreSQL | JWT |
-| Notification Service | 8085 | N/A | JWT |
-| Eureka Server | 8761 | N/A | N/A |
-| Config Server | 8888 | N/A | N/A |
+| Service         | Port | Database   | Auth Method          |
+|-----------------|------|------------|----------------------|
+| API Gateway     | 8080 | N/A        | JWT & Gateway Secret |
+| User Service    | 8081 | PostgreSQL | JWT & Gateway Secret |
+| Product Service | 8082 | PostgreSQL | Gateway Secret       |
+| Order Service   | 8083 | PostgreSQL | JWT & Gateway Secret |
+| Cart Service    | 8084 | PostgreSQL | JWT & Gateway Secret |
+| Eureka Server   | 8761 | N/A        | N/A                  |
+| Config Server   | 8888 | N/A        | N/A                  |
 
 ### External Dependencies
 - PostgreSQL 12+ (shared database)
-- RabbitMQ 3.8+ (messaging)
-- Elasticsearch 7+ (search)
-- Redis (optional, for caching)
 - Zipkin (tracing, optional)
-
 ---
 
 ## File Structure Reference
@@ -493,24 +484,24 @@ Backend/
 
 ## Key Technologies Stack
 
-| Category | Technology | Version |
-|----------|-----------|---------|
-| Framework | Spring Boot | 4.0.1 |
-| Cloud | Spring Cloud | 2025.1.0 |
-| Language | Java | 25 |
-| Database | PostgreSQL | 12+ |
-| Build Tool | Maven | 3.6+ |
-| JWT | JJWT | 0.12.3 |
-| Mapping | MapStruct | 1.5.5.Final |
-| ORM | Hibernate/JPA | Via Spring Data |
-| Payment | Stripe | 32.0.0 |
-| Search | Elasticsearch | 7+ |
-| Messaging | RabbitMQ | 3.8+ |
-| Tracing | Brave/Zipkin | Spring Boot integrated |
-| Observability | OpenTelemetry | Spring Boot integrated |
-| Metrics | Prometheus | Spring Boot integrated |
-| Annotations | Lombok | Latest |
-| Discovery | Netflix Eureka | Spring Cloud integrated |
+| Category      | Technology     | Version                 |
+|---------------|----------------|-------------------------|
+| Framework     | Spring Boot    | 4.0.1                   |
+| Cloud         | Spring Cloud   | 2025.1.0                |
+| Language      | Java           | 25                      |
+| Database      | PostgreSQL     | 12+                     |
+| Build Tool    | Maven          | 3.6+                    |
+| JWT           | JJWT           | 0.12.3                  |
+| Mapping       | MapStruct      | 1.5.5.Final             |
+| ORM           | Hibernate/JPA  | Via Spring Data         |
+| Payment       | Stripe         | 32.0.0                  |
+| Search        | Elasticsearch  | 7+                      |
+| Messaging     | RabbitMQ       | 3.8+                    |
+| Tracing       | Brave/Zipkin   | Spring Boot integrated  |
+| Observability | OpenTelemetry  | Spring Boot integrated  |
+| Metrics       | Prometheus     | Spring Boot integrated  |
+| Annotations   | Lombok         | Latest                  |
+| Discovery     | Netflix Eureka | Spring Cloud integrated |
 
 ---
 
@@ -518,16 +509,14 @@ Backend/
 
 1. **PostgreSQL** - Database
 2. **RabbitMQ** - Message broker
-3. **Elasticsearch** (Optional) - Search
-4. **Eureka Server** - Service registry
-5. **Config Server** - Configuration provider
-6. **User Service** - Authentication service
-7. **Product Service** - Product catalog
-8. **Order Service** - Order processing
-9. **Cart Service** - Shopping cart
-10. **API Gateway** - Entry point
-11. **Notification Service** - Email notifications
-12. **Zipkin** (Optional) - Distributed tracing
+3. **Eureka Server** - Service registry
+4. **Config Server** - Configuration provider
+5. **User Service** - Authentication service
+6. **Product Service** - Product catalog
+7. **Order Service** - Order processing
+8. **Cart Service** - Shopping cart
+9. **API Gateway** - Entry point
+10. **Zipkin** (Optional) - Distributed tracing
 
 ---
 
@@ -550,7 +539,6 @@ This is a **production-ready microservices architecture** with:
 - JWT-based authentication & authorization
 - OAuth2 social login support
 - Payment processing with Stripe
-- Full-text search with Elasticsearch
 - Distributed tracing & observability
 - Health checks & metrics collection
 - CORS configuration
